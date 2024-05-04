@@ -82,13 +82,25 @@ limit 1;
 # Consultas queries XL parte II - JOIN
 
 # Generar un listado de todas las facturas del empleado 'Buchanan'. 
-
+SELECT e.EmpleadoID, e.Apellido, COUNT(f.FacturaID) AS totalFacturas
+FROM empleados e
+LEFT JOIN facturas f ON e.EmpleadoID = f.EmpleadoID
+WHERE e.Apellido = 'Buchanan'
+GROUP BY e.EmpleadoID, e.Apellido;
 
 # Generar un listado con todos los campos de las facturas del correo 'Speedy Express'.
+
 # Generar un listado de todas las facturas con el nombre y apellido de los empleados.
+SELECT e.EmpleadoID, e.Nombre, e.Apellido, COUNT(f.FacturaID) AS totalFacturas
+FROM empleados e
+LEFT JOIN facturas f ON e.EmpleadoID = f.EmpleadoID
+GROUP BY e.EmpleadoID, e.Apellido;
+
 # Mostrar un listado de las facturas de todos los clientes “Owner” y país de envío “USA”.
 # Mostrar todos los campos de las facturas del empleado cuyo apellido sea “Leverling” o que incluyan el producto id = “42”.
 # Mostrar todos los campos de las facturas del empleado cuyo apellido sea “Leverling” y que incluya los producto id = “80” o ”42”.
 # Generar un listado con los cinco mejores clientes, según sus importes de compras total (PrecioUnitario * Cantidad).
 # Generar un listado de facturas, con los campos id, nombre y apellido del cliente, fecha de factura, país de envío, Total, ordenado de manera descendente por fecha de factura y limitado a 10 filas.
-
+select * from facturas;
+select * from empleados;
+select * from proveedores;
