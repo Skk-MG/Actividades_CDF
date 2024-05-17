@@ -15,14 +15,16 @@ Realizar una consulta de la facturación de e-market. Incluir la siguiente infor
 SELECT f.FacturaID,
     f.FechaFactura,
     co.Compania AS empresaCorreo,
-    cli.Compania AS nombreCliente,
+    cli.Contacto AS nombreCliente,
     ca.CategoriaNombre AS categoriaProducto,
     p.ProductoNombre AS nombreProducto,
     p.PrecioUnitario,
-    p.UnidadesStock AS cantidad
-FROM facturas AS f, productos AS p
+    p.UnidadesStock AS cantidad	
+FROM facturas AS f
 INNER JOIN correos co ON f.EnvioVia = co.CorreoID
-INNER JOIN clientes cli ON f.ClienteID = cli.ClienteID
+INNER JOIN clientes cli ON cli.ClienteID = f.ClienteID
+INNER JOIN facturadetalle fd ON f.FacturaID = fd.FacturaID
+INNER JOIN productos p ON p.ProductoID = fd.ProductoID
 INNER JOIN categorias ca ON p.CategoriaID = ca.CategoriaID;
 
 # Listar todas las categorías junto con información de sus productos. Incluir todas las categorías aunque no tengan productos.
